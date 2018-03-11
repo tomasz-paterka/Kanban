@@ -1,9 +1,10 @@
 // KLASA KANBAN CARD
-function Card(id, name) {
+function Card(id, name, bootcamp_kanban_column_id) {
 	var self = this;
 
 	this.id = id;
 	this.name = name || 'No name given';
+	this.bootcamp_kanban_column_id = bootcamp_kanban_column_id;
 	this.element = createCard();
 
 	function createCard() {
@@ -17,17 +18,17 @@ function Card(id, name) {
 		});
 
 		cardChangeName.click(function(event) {
-			var cardName = prompt('Enter new name of the card');
+			var newCardName = prompt('Enter new name of the card');
 			event.preventDefault();
 			$.ajax({
 				url: baseUrl + '/card/' + self.id,
 				method: 'PUT',
 				data: {
-					name: cardName,
-					bootcamp_kanban_column_id: self.id
+					name: newCardName,
+					bootcamp_kanban_column_id: self.bootcamp_kanban_column_id
 				},
 				success: function (response) {
-					self.element.children('p').html(cardName);
+					self.element.children('p').html(newCardName);
 				}
 			});
 		});

@@ -20,16 +20,16 @@ function Column(id, name) {
 		});
 		
 		columnChangeName.click(function(event) {
-			var columnName = prompt('Enter new name of the column');
+			var newColumnName = prompt('Enter new name of the column');
 			event.preventDefault();
 			$.ajax({
 				url: baseUrl + '/column/' + self.id,
 				method: 'PUT',
 				data: {
-					name: columnName
+					name: newColumnName
 				},
 				success: function(response) {
-					self.element.children('h2').html(columnName);
+					self.element.children('h2').html(newColumnName);
 				}
 			});
 		});
